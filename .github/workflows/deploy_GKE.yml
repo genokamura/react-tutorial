@@ -10,7 +10,6 @@ env:
   DEPLOYMENT_NAME: react-tutorial
   IMAGE: react-tutorial
   DOCKER_HUB_ID: genok1105
-  DOCKER_HUB_PASSWORD: ${{ secrets.DOCKER_HUB_PASS }}
 
 jobs:
   build_publish_deploy:
@@ -48,7 +47,7 @@ jobs:
       - name: Login to Docker
         uses: docker/login-action@v1
         with:
-          username: $DOCKER_HUB_ID
+          username: ${DOCKER_HUB_ID}
           password: ${{ secrets.DOCKER_HUB_PASS }}
 
       - name: Publish
