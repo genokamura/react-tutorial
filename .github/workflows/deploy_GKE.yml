@@ -37,9 +37,7 @@ jobs:
 
       - name: Build and Test
         run: |-
-          docker build \
-            -t "${{ github.repository_owner }}/$IMAGE:$GITHUB_SHA" \
-            ./
+          docker build -t $GITHUB_SHA .
       
       - name: Login to Docker
         uses: docker/login-action@v1
@@ -50,8 +48,11 @@ jobs:
 
       - name: Publish
         run: |-
-          docker image push ${{ github.repository_owner }}/${IMAGE}:${GITHUB_SHA}
-
+          docker tag ${GITHUB_SHA} ghcr.io/${{ github.repository_owner }}/${IMAGE}:${GITHUB_SHA}
+          docker image push ghcr.io/${{ github.repository_owner }}/${IMAGE}:${GITHUB_SHA}
+          docker tag ${GITHUB_SHA} ghcr.io/${{ github.repository_owner }}/${IMAGE}:latest
+          docker image push ghcr.io/${{ github.repository_owner }}/${IMAGE}:latest
+          
       - name: Deploy to GKE cluster
         run: |-
           helm upgrade --install --values=./helm/staging-values.yml ${DEPLOYMENT_NAME} ./helm
