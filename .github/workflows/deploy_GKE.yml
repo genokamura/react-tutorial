@@ -45,6 +45,6 @@ jobs:
       
       - name: Deploy to GKE cluster
         run: |-
-          helm upgrade --install --values=./helm/staging-values.yml ${DEPLOYMENT_NAME}-react-tutorial ./helm
+          helm upgrade --install --values=./helm/staging-values.yml ${IMAGE}-${DEPLOYMENT_NAME} ./helm
           kubectl rollout status deployment/$DEPLOYMENT_NAME
           kubectl get services -o wide
