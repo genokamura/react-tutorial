@@ -3,13 +3,12 @@ name: Build and Deploy to GKE
 on:
   push:
     branches: [ trunk ]
-
-  env:
-    PROJECT_ID: ${{ secrets.GKE_PROJECT_DEV }}
-    GKE_CLUSTER: react-tutorial-staging
-    GKE_ZONE: asia-northeast1
-    DEPLOYMENT_NAME: react-tutorial-staging
-    IMAGE: react-tutorial
+env:
+  PROJECT_ID: ${{ secrets.GKE_PROJECT_DEV }}
+  GKE_CLUSTER: react-tutorial-staging
+  GKE_ZONE: asia-northeast1
+  DEPLOYMENT_NAME: react-tutorial-staging
+  IMAGE: react-tutorial
 
 jobs:
   build_and_publish:
