@@ -11,8 +11,8 @@ env:
   IMAGE: react-tutorial
 
 jobs:
-  build_and_publish:
-    name: Build and Publish
+  build_publish_deploy:
+    name: Build, Publish and Deploy
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
