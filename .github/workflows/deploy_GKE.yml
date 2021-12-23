@@ -45,6 +45,6 @@ jobs:
       
       - name: Deploy to GKE cluster
         run: |-
-          helm install $IMAGE:$GITHUB_SHA ./helm
+          helm install $IMAGE ./helm
           kubectl rollout status deployment/$DEPLOYMENT_NAME
           kubectl get services -o wide
