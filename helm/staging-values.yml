@@ -2,7 +2,7 @@ environment: staging
 replicaCount: 1
 
 image:
-  repository: genok1105/react-tutorial
+  repository: ghcr.io/genokamura/react-tutorial
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
