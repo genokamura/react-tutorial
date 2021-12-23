@@ -50,8 +50,7 @@ jobs:
 
       - name: Publish
         run: |-
-          docker image push ghcr.io/${{ github.repository_owner }}/${IMAGE}:${GITHUB_SHA}
-          docker image push ghcr.io/${{ github.repository_owner }}/${IMAGE}:latest
+          docker image push ${{ github.repository_owner }}/${IMAGE}:${GITHUB_SHA}
 
       - name: Deploy to GKE cluster
         run: |-
