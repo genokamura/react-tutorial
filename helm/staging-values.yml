@@ -4,6 +4,7 @@ replicaCount: 1
 image:
   repository: ghcr.io/genokamura/react-tutorial
   pullPolicy: Always
+  tag: latest
 
 imagePullSecrets: []
 nameOverride: ""
