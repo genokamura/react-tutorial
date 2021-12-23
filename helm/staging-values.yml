@@ -3,7 +3,7 @@ replicaCount: 1
 
 image:
   repository: ghcr.io/genokamura/react-tutorial
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 
 imagePullSecrets: []
 nameOverride: ""
