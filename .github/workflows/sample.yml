@@ -7,6 +7,8 @@ on:
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT_DEV }}
   IMAGE: react-tutorial
+  GKE_CLUSTER: react-tutorial
+  GKE_ZONE: asia-northeast1
 
 jobs:
   sample:
@@ -43,3 +45,10 @@ jobs:
       - name: Publish
         run: |-
           docker push "gcr.io/$PROJECT_ID/$IMAGE:GITHUB_SHA"
+
+      - name: Get GKE credentials
+        uses: google-github-actions/get-gke-credentials@v0
+        with:
+          project_id: ${{ env.PROJECT_ID }}
+          cluster_name: ${{ env.GKE_CLUSTER }}
+          location: ${{ env.GKE_ZONE }}
