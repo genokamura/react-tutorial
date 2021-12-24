@@ -40,14 +40,9 @@ jobs:
         run: |-
           docker build -t "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA" .
       
-      - name: Run container to Test
+      - name: Test
         run: |-
-          docker run --name ${IMAGE} gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA 
-          docker container list
-
-      - name: Tests
-        run: |-
-          docker exec -w ${IMAGE} yarn test --watchAll=false
+          docker run --name ${IMAGE} gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA yarn test --watchAll=false
 
       - name: Publish
         run: |-
