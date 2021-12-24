@@ -22,3 +22,7 @@ jobs:
       - name: Run Test
         run: |-
           docker run $IMAGE:test yarn test --watchAll=false
+      
+      - name: Build
+        run: |-
+          docker build --tag $IMAGE:$GITHUB_SHA .
