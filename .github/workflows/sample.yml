@@ -5,6 +5,7 @@ on:
     branches: [ develop, main ]
 
 env:
+  PROJECT_ID: ${{ secrets.GKE_PROJECT_DEV }}
   IMAGE: react-tutorial
 
 jobs:
@@ -25,7 +26,7 @@ jobs:
       
       - name: Build
         run: |-
-          docker build --tag $IMAGE:$GITHUB_SHA .
+          docker build --tag "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA" .
 
       - name: Authorize to GCP
         uses: google-github-actions/auth@v0
@@ -38,3 +39,7 @@ jobs:
       - name: Configure Docker to use gcloud CLI as auth helper
         run: |-
           gcloud auth configure-docker
+
+      - name: Publish
+        run: |-
+          docker push "gcr.io/$PROJECT_ID/$IMAGE:GITHUB_SHA"
