@@ -42,7 +42,7 @@ jobs:
 
       - name: Test
         run: |-
-          docker run $IMAGE:test bash -c yarn test --watchAll=false
+          docker run $IMAGE:test yarn test --watchAll=false
 
       - name: Build
         run: |-
