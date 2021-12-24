@@ -17,7 +17,7 @@ jobs:
 
       - name: Build image for test
         run: |-
-          docker build --target build --tag $IMAGE:test
+          docker build --target build --tag $IMAGE:test .
 
       - name: Run Test
         run: |-
