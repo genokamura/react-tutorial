@@ -5,17 +5,20 @@ on:
     branches: [ develop, main ]
 
 env:
-  HOGE: hogehoge
-  FUGA: fugafuga
+  IMAGE: react-tutorial
 
 jobs:
   sample:
     name: sample
     runs-on: ubuntu-latest
     steps:
-      - name: first step
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build image for test
         run: |-
-          echo $HOGE
-      - name: second step
+          docker build --target build --tag $IMAGE:test
+
+      - name: Run Test
         run: |-
-          echo $FUGA
+          docker run $IMAGE:test yarn test --watchAll=false
