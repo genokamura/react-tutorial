@@ -44,7 +44,7 @@ jobs:
 
       - name: Publish
         run: |-
-          docker push "gcr.io/$PROJECT_ID/$IMAGE:GITHUB_SHA"
+          docker push "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA"
 
       - name: Get GKE credentials
         uses: google-github-actions/get-gke-credentials@v0
