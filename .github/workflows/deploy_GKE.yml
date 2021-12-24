@@ -42,7 +42,7 @@ jobs:
       
       - name: Test
         run: |-
-          docker run --name ${IMAGE} gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA yarn test --watchAll=false
+          docker run --name ${IMAGE} gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA bash -c yarn test --watchAll=false
 
       - name: Publish
         run: |-
