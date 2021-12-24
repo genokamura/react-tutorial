@@ -4,7 +4,6 @@ COPY package.json .
 RUN yarn install
 COPY . .
 RUN yarn run build
-RUN yarn test --watchAll=false
 
 FROM nginx:1.20.2
 COPY --from=build /usr/src/app/build /usr/share/nginx/html
