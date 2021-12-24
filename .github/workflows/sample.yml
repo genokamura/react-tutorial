@@ -9,6 +9,7 @@ env:
   IMAGE: react-tutorial
   GKE_CLUSTER: react-tutorial
   GKE_ZONE: asia-northeast1
+  DEPLOYMENT_NAME_STAGING: react-tutorial-staging
 
 jobs:
   sample:
@@ -52,3 +53,11 @@ jobs:
           project_id: ${{ env.PROJECT_ID }}
           cluster_name: ${{ env.GKE_CLUSTER }}
           location: ${{ env.GKE_ZONE }}
+
+      - name: Deploy to GKE cluster (Staging)
+        run: |-
+          helm upgrade --install \
+            --values=./helm/staging-values.yml \
+            --set image.repository="gcr.io/$PROJECT_ID/$IMAGE" \
+            --set image.tag=$GITHUB_SHA \
+            $DEPLOYMENT_NAME_STAGING ./helm
