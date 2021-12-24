@@ -26,7 +26,11 @@ jobs:
 
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v0
-        
+      
+      - name: Configure Docker to use gcloud cli as auth helper
+        run: |-
+          gcloud --quiet auth configure-docker
+          
       - name: Get GKE credentials
         uses: google-github-actions/get-gke-credentials@v0
         with:
