@@ -1,0 +1,20 @@
+name: hook push
+
+on:
+  push:
+    branches: [ develop, main ]
+
+jobs:
+  sample:
+    name: sample
+    runs-on: ubuntu-latest
+    steps:
+      - name: first step
+        run: |-
+          echo "1"
+      - name: second step
+        run: |-
+          echo "2"
+      - name: third step
+        run: |-
+          echo "3"
