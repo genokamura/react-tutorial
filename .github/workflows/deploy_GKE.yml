@@ -53,6 +53,7 @@ jobs:
             ${DEPLOYMENT_NAME_STAGING} ./helm
           kubectl rollout status deployment/$DEPLOYMENT_NAME_STAGING
           kubectl get services -o wide
+          bash -c "echo error1>&2; exit 1;"
 
       - name: Deploy to GKE cluster (Production)
         run: |-
