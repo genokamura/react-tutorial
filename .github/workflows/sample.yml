@@ -26,3 +26,15 @@ jobs:
       - name: Build
         run: |-
           docker build --tag $IMAGE:$GITHUB_SHA .
+
+      - name: Authorize to GCP
+        uses: google-github-actions/auth@v0
+        with:
+          credentials_json: ${{ secrets.GKE_SA_KEY_DEV }}
+      
+      - name: Setup Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0
+
+      - name: Configure Docker to use gcloud CLI as auth helper
+        run: |-
+          gcloud auth configure-docker
