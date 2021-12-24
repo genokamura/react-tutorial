@@ -42,7 +42,7 @@ jobs:
       
       - name: Test
         run: |-
-          docker exec -w /usr/src/app yarn test --watchAll=false
+          docker exec -w /usr/src/app "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA" yarn test --watchAll=false
 
       - name: Publish
         run: |-
