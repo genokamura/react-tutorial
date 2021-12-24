@@ -2,7 +2,7 @@ environment: development
 replicaCount: 1
 
 image:
-  repository: LOCAL_REPOSITORY_NAME
+  repository: LOCAL_REPOSITORY
   pullPolicy: Always
   tag: "latest"
 
