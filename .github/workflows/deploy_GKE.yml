@@ -42,12 +42,12 @@ jobs:
       
       - name: Run container to Test
         run: |-
-          docker run --name ${IMAGE}:test gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA 
+          docker run --name ${IMAGE} gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA 
           docker container list
 
       - name: Tests
         run: |-
-          docker exec -w ${IMAGE}:test yarn test --watchAll=false
+          docker exec -w ${IMAGE} yarn test --watchAll=false
 
       - name: Publish
         run: |-
