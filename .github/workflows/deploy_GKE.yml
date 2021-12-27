@@ -72,7 +72,7 @@ jobs:
             --project $PROJECT_ID && \
             kubectl get services react-tutorial-staging -o json | \
             jq '.status.loadBalancer.ingress[].ip'`
-          export CYPRESS_HOST=`echo http://$STAGING_IP`
+          export CYPRESS_HOST=`printf "http://%s" $STAGING_IP`
           npm install cypress
           npx cypress run -b chrome
 
