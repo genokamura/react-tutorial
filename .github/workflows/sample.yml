@@ -10,6 +10,7 @@ env:
   GKE_CLUSTER: react-tutorial
   GKE_ZONE: asia-northeast1
   DEPLOYMENT_NAME_STAGING: react-tutorial-staging
+  DEPLOYMENT_NAME_PRODUCTION: react-tutorial-production
 
 jobs:
   sample:
@@ -73,3 +74,12 @@ jobs:
           export CYPRESS_HOST=`printf http://%s" $STAGING_IP`
           npm install cypress
           npx cypress run -b chrome
+
+      - name: Deploy to GKE cluster (Production)
+        run: |-
+          helm upgrade --install \
+            --values=./helm/production-values.yml \
+            --set image.repository="gcr.io/$PROJECT_ID/$IMAGE" \
+            --set image.tag=$GITHUB_SHA \
+            $DEPLOYMENT_NAME_PRODUCTION ./helm
+      
