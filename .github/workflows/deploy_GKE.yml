@@ -64,9 +64,16 @@ jobs:
           kubectl rollout status deployment/$DEPLOYMENT_NAME_STAGING
           kubectl get services -o wide
 
-      - name: (TODO) RUN E2E TESTS ON STAGING 
+      - name: Run E2E Test on Staging 
         run: |-
-          kubectl version
+          jq --version
+          export CYPRESS_HOST=`gcloud container clusters get-credentials $GKE_CLUSTER \
+            --region $GKE_ZONE \
+            --project $PROJECT_ID && \
+            kubectl get services react-tutorial-staging -o json | \
+            jq '.status.loadBalancer.ingress[].ip'`
+          npm install cypress
+          npx cypress run -b chrome
 
       - name: Deploy to GKE cluster (Production)
         run: |-
