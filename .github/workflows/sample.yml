@@ -63,12 +63,13 @@ jobs:
             --set image.tag=$GITHUB_SHA \
             $DEPLOYMENT_NAME_STAGING ./helm
       
-      - name: Run E2E Tests on Staging
+      - name: Run E2E Tests on Staging 
         run: |-
+          jq --version
           STAGING_IP=`gcloud container clusters get-credentials $GKE_CLUSTER \
             --region $GKE_ZONE \
             --project $PROJECT_ID && \
-            kubectl get services $DEPLOYMENT_NAME_STAGING -o json \
+            kubectl get services $DEPLOYMENT_NAME_STAGING -o json | \
             jq '.status.loadBalancer.ingress[].ip' | \
             sed -r 's/"//g'`
           export CYPRESS_HOST=`printf "http://%s" $STAGING_IP`
