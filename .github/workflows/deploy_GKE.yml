@@ -67,11 +67,12 @@ jobs:
       - name: Run E2E Test on Staging 
         run: |-
           jq --version
-          export CYPRESS_HOST=`gcloud container clusters get-credentials $GKE_CLUSTER \
+          STAGING_IP=`gcloud container clusters get-credentials $GKE_CLUSTER \
             --region $GKE_ZONE \
             --project $PROJECT_ID && \
             kubectl get services react-tutorial-staging -o json | \
             jq '.status.loadBalancer.ingress[].ip'`
+          export CYPRESS_HOST=`echo http://$STAGING_IP`
           npm install cypress
           npx cypress run -b chrome
 
