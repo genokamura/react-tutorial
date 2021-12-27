@@ -71,7 +71,7 @@ jobs:
             kubectl get services $DEPLOYMENT_NAME_STAGING -o json \
             jq '.status.loadBalancer.ingress[].ip' | \
             sed -r 's/"//g'`
-          export CYPRESS_HOST=`printf http://%s" $STAGING_IP`
+          export CYPRESS_HOST=`printf "http://%s" $STAGING_IP`
           npm install cypress
           npx cypress run -b chrome
 
