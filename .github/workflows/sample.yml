@@ -67,7 +67,7 @@ jobs:
         run: |-
           STAGING_IP=`gcloud container get-credentials $GKE_CLUSTER \
             --region $GKE_ZONE \
-            --project $PROJECT_ID \
+            --project $PROJECT_ID && \
             kubectl get services $DEPLOYMENT_NAME_STAGING -o json \
             jq '.status.loadBalancer.ingress[].ip' | \
             sed -r 's/"//g'`
