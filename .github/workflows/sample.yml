@@ -65,7 +65,7 @@ jobs:
       
       - name: Run E2E Tests on Staging
         run: |-
-          STAGING_IP=`gcloud container get-credentials $GKE_CLUSTER \
+          STAGING_IP=`gcloud container clusters get-credentials $GKE_CLUSTER \
             --region $GKE_ZONE \
             --project $PROJECT_ID && \
             kubectl get services $DEPLOYMENT_NAME_STAGING -o json \
