@@ -14,7 +14,7 @@ env:
 
 jobs:
   sample:
-    name: sample
+    name: Build, Test, Publish and Deploy
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -83,4 +83,3 @@ jobs:
             --set image.repository="gcr.io/$PROJECT_ID/$IMAGE" \
             --set image.tag=$GITHUB_SHA \
             $DEPLOYMENT_NAME_PRODUCTION ./helm
-      
